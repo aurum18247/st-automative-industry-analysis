@@ -9,7 +9,7 @@ from sklearn.preprocessing import StandardScaler
 
 st.title('Automobile Industry Analysis')
 
-df = pd.read_csv(r"C:\Users\Lavanya reddy\Downloads\cars.csv")
+df = pd.read_csv(r'cars.csv')
 
 
 
@@ -165,28 +165,25 @@ total_customers = len(df)
 
 # Loop through each unique model in the dataframe
 for model, model_data in df.groupby('Make'):
-  # Count the number of customers who purchased the model
-  number_of_customers_purchased = len(model_data)
+    # Count the number of customers who purchased the model
+    number_of_customers_purchased = len(model_data)
 
-  # Calculate the percentage of customers who purchased the model
-  purchase_percentage = (number_of_customers_purchased / total_customers) * 100
+    # Calculate the percentage of customers who purchased the model
+    purchase_percentage = (number_of_customers_purchased / total_customers) * 100
 
-  # Add the data to the dictionary
-  customer_segmentation[model] = {
-    "Number_of_Customers_Purchased": number_of_customers_purchased,
-    "Percentage": purchase_percentage
-  }
+    # Add the data to the dictionary
+    customer_segmentation[model] = {
+        "Number_of_Customers_Purchased": number_of_customers_purchased,
+        "Percentage": purchase_percentage
+    }
 
 # Create a pie chart of the customer segmentation data
 pie_chart = px.pie(
-  customer_segmentation.values(),
-  names=customer_segmentation.keys(),
-  values='Number_of_Customers_Purchased',
-  title='Customer Segmentation by Model'
+    customer_segmentation.values(),
+    names=customer_segmentation.keys(),
+    values='Number_of_Customers_Purchased',
+    title='Customer Segmentation by Model'
 )
 
 # Show the pie chart on the Streamlit app
 st.plotly_chart(pie_chart)
-
-# Display the customer segmentation data
-st.write(customer_segmentation)
